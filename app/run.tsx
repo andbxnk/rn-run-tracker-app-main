@@ -30,20 +30,26 @@ export default function Run() {
   );
 
   const renderItem = ({ item }: { item: any }) => (
-    <View style={styles.card}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => router.push(`/${item.id}`)}
+      activeOpacity={0.7}
+    >
       <Image
         source={{ uri: item.imageurl || item.image_url }}
         style={styles.cardImage}
       />
       <View style={styles.cardContent}>
-        <Text style={styles.cardTitle}>{item.location}</Text>
-        <Text style={styles.cardText}>ระยะทาง: {item.distance} กม.</Text>
-        <Text style={styles.cardText}>
-          ช่วงเวลา: {item.timeOfDay || item.time_of_day}
-        </Text>
-        <Text style={styles.cardText}>วันที่: {item.run_date}</Text>
+        <View style={styles.cardTextGroup}>
+          <Text style={styles.cardTitle}>{item.location}</Text>
+          <Text style={styles.cardDate}>{item.run_date}</Text>
+        </View>
+        <View style={styles.cardRight}>
+          <Text style={styles.cardDistance}>{item.distance} km</Text>
+          <Ionicons name="chevron-forward" size={20} color="#ccc" />
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -97,39 +103,62 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   listContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     paddingBottom: 100,
   },
   card: {
-    backgroundColor: "white",
-    borderRadius: 12,
-    marginBottom: 16,
-    overflow: "hidden",
-    elevation: 3,
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    marginBottom: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingRight: 12,
+    elevation: 2,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
     shadowRadius: 4,
+    overflow: "hidden",
   },
   cardImage: {
-    width: "100%",
-    height: 150,
+    width: 80,
+    height: 80,
+    borderRadius: 12,
     backgroundColor: "#e0e0e0",
+    margin: 10,
   },
   cardContent: {
-    padding: 16,
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 12,
+    paddingRight: 4,
+  },
+  cardTextGroup: {
+    flex: 1,
+    marginRight: 8,
   },
   cardTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 8,
+    fontSize: 16,
     fontFamily: "Krub_700Bold",
-  },
-  cardText: {
-    fontSize: 14,
-    color: "#555",
+    color: "#222",
     marginBottom: 4,
+  },
+  cardDate: {
+    fontSize: 13,
     fontFamily: "Krub_400Regular",
+    color: "#999",
+  },
+  cardRight: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  cardDistance: {
+    fontSize: 15,
+    fontFamily: "Krub_700Bold",
+    color: "#1889da",
+    marginRight: 4,
   },
   emptyText: {
     textAlign: "center",

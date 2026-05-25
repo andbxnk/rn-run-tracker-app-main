@@ -1,18 +1,19 @@
 import {
-  Krub_400Regular,
-  Krub_700Bold,
+  Kanit_400Regular,
+  Kanit_700Bold,
   useFonts,
-} from "@expo-google-fonts/krub";
+} from "@expo-google-fonts/kanit";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-
+ 
 export default function RootLayout() {
+  // Load the Kanit font ---------------
   const [fontsLoaded] = useFonts({
-    Krub_400Regular,
-    Krub_700Bold,
+    Kanit_400Regular,
+    Kanit_700Bold,
   });
-
+ 
   useEffect(() => {
     async function prepare() {
       if (fontsLoaded) {
@@ -34,7 +35,7 @@ export default function RootLayout() {
           backgroundColor: "#1619ec",
         },
         headerTitleStyle: {
-          fontFamily: "Krub_400Regular",
+          fontFamily: "Kanit_400Regular",
           fontSize: 20,
           color: "#fff",
         },
@@ -44,9 +45,11 @@ export default function RootLayout() {
       }}
     >
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="run" options={{ title: "Run Tracker V.1.1" }} />
+      <Stack.Screen name="run" options={{ title: "Run Tracker V.1.0.0" }} />
+      {/* <Stack.Screen name="run" options={{ title: "Run Tracker" }} /> */}
       <Stack.Screen name="add" options={{ title: "เพิ่มรายการวิ่ง" }} />
-      <Stack.Screen name="[id]" options={{ title: "รายละเอียดการวิ่ง" }} />
+      <Stack.Screen name="id" options={{ title: "รายละเอียดการวิ่ง" }} />
     </Stack>
   );
 }
+ 
